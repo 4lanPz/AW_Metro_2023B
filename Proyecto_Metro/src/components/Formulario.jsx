@@ -3,7 +3,7 @@ import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react'
 
-export const Formulario = ({setEstado,idMetro}) => {
+export const Formulario = ({setEstado,idMetro,setIdmetro}) => {
 
     const [error, setError] = useState(false)
     const [mensaje, setMensaje] = useState(false)
@@ -21,7 +21,7 @@ export const Formulario = ({setEstado,idMetro}) => {
             {
                 (async function (idMetro) {
                     try {
-                        const respuesta = await (await fetch(`http://localhost:3000/metro/${idMetro}`)).json()
+                        const respuesta = await (await fetch(`hhttps://65b95a50b71048505a8ab831.mockapi.io/metro/${idMetro}`)).json()
                         const {id,nombre,sector,salida,llegada,maquinista,detalles} = respuesta
                         setform({
                             ...form,
@@ -62,7 +62,7 @@ export const Formulario = ({setEstado,idMetro}) => {
         try {
 
             if(form.id){
-                const url = `http://localhost:3000/metro/${form.id}`
+                const url = `https://65b95a50b71048505a8ab831.mockapi.io/metro/${form.id}`
                 await fetch(url,{
                     method:'PUT',
                     body:JSON.stringify(form),
@@ -70,6 +70,7 @@ export const Formulario = ({setEstado,idMetro}) => {
                 })
                 setEstado(true)
                 setform({})
+                setIdmetro(0)
 								setTimeout(() => {
                     setEstado(false)
                     setform({})
@@ -77,7 +78,7 @@ export const Formulario = ({setEstado,idMetro}) => {
                 }, 1000)
             }
             else{
-                const url ="http://localhost:3000/metro"
+                const url ="https://65b95a50b71048505a8ab831.mockapi.io/metro"
                             form.id = uuidv4()
                 await fetch(url,{
                     method:'POST',
